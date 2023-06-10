@@ -1,0 +1,26 @@
+{
+    "banco": {
+        "nome": "Bank",
+        "numero": "123",
+        "agencia": "0001",
+        "senha": "123Bank"
+    },
+    "identificador_contas": 2,
+    "contas": [
+        {
+            "numero": "1",
+            "saldo": 0,
+            "usuario": {
+                "nome": "Teste",
+                "cpf": "00011122233",
+                "data_nascimento": "2021-03-15",
+                "telefone": "71999998888",
+                "email": "teste@bank.com",
+                "senha": "1234"
+            }
+        }
+    ],
+    "saques": [],
+    "depositos": [],
+    "transferencias": []
+}
