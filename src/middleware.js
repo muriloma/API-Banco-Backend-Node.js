@@ -1,5 +1,6 @@
 const fs = require('fs/promises');
 const { validate } = require('gerador-validador-cpf')
+const { buscarCpf } = require('./utils/auxfunc')
 
 
 const validarSenhaBancoAdm = async (req, res, next) => {
@@ -24,11 +25,7 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe um cpf válido" })
     }
 
-    const cpfEmUso = dadosBanco.contas.find((conta) => {
-        return conta.usuario.cpf === cpf
-    });
-
-    if (cpfEmUso) {
+    if (buscarCpf(cpf)) {
         return res.status(400).json({ mensagem: "Cpf já cadastrado" })
     };
 
