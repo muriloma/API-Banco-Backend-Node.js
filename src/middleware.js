@@ -1,6 +1,7 @@
 const fs = require('fs/promises');
 const { validate } = require('gerador-validador-cpf')
-const { buscarCpf } = require('./utils/auxfunc')
+const validarEmail = require('email-validator')
+const aux = require('./utils/auxfunc')
 
 
 const validarSenhaBancoAdm = async (req, res, next) => {
@@ -25,7 +26,7 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe um cpf válido" })
     }
 
-    if (buscarCpf(cpf)) {
+    if (await aux.buscarCpf(cpf)) {
         return res.status(400).json({ mensagem: "Cpf já cadastrado" })
     };
 
@@ -37,15 +38,15 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe o telefone" })
     }
 
-    if (!email) {
-        return res.status(400).json({ mensagem: "Por favor informe o email" })
+    if (!email || !validarEmail.validate(email)) {
+        return res.status(400).json({ mensagem: "Por favor informe um email válido" })
     }
 
-    const emailEmUso = dadosBanco.contas.find((conta) => {
-        return conta.usuario.email === email
-    });
+    // const emailEmUso = dadosBanco.contas.find((conta) => {
+    //     return conta.usuario.email === email
+    // });
 
-    if (emailEmUso) {
+    if (await aux.buscarEmail(email)) {
         return res.status(400).json({ mensagem: "E-mail já cadastrado" })
     };
 

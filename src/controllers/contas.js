@@ -16,9 +16,6 @@ const criarContaUsuario = async (req, res) => {
     };
 
     dadosBanco.contas.push(novaConta);
-
-    //await fs.writeFile('./src/enderecos.json', enderecoStringfy);
-
     await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco))
 
     return res.status(200).json({ mensagem: "Conta cadastrada com sucesso." })
