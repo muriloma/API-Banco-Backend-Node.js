@@ -38,13 +38,13 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe o telefone" })
     }
 
+    if (telefone.length() > 11 || telefone.length() < 10) {
+        return res.status(400).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+    }
+
     if (!email || !validarEmail.validate(email)) {
         return res.status(400).json({ mensagem: "Por favor informe um email válido" })
     }
-
-    // const emailEmUso = dadosBanco.contas.find((conta) => {
-    //     return conta.usuario.email === email
-    // });
 
     if (await aux.buscarEmail(email)) {
         return res.status(400).json({ mensagem: "E-mail já cadastrado" })
@@ -52,6 +52,14 @@ const validarNovaConta = async (req, res, next) => {
 
     if (!senha) {
         return res.status(400).json({ mensagem: "Por favor informe a senha" })
+    }
+    
+    if (isNaN(Number(senha))) {
+        return res.status(400).json({ mensagem: "A senha só pode conter números" })
+    }
+
+    if (senha.length() < 8 || senha.length() > 24) {
+        return res.status(400).json({ mensagem: "A senha deve conter de 8 a 24 dígitos" })
     }
 
     return next()
