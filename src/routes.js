@@ -9,4 +9,7 @@ rotas.get('/contas', middleware.validarSenhaBancoAdm, contas.listarContas);
 //POST /contas
 rotas.post('/contas', middleware.validarNovaConta, contas.criarContaUsuario);
 
+//PUT /contas/:numeroConta/usuario
+rotas.put('/contas/:numeroConta/usuario', middleware.validarSenha, contas.atualizarCadastroUsuario);
+
 module.exports = rotas;

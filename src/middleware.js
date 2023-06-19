@@ -39,11 +39,11 @@ const validarNovaConta = async (req, res, next) => {
     }
 
     if (telefone.length() > 11 || telefone.length() < 10) {
-        return res.status(400).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+        return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
     }
 
     if (!email || !validarEmail.validate(email)) {
-        return res.status(400).json({ mensagem: "Por favor informe um email válido" })
+        return res.status(401).json({ mensagem: "Por favor informe um email válido" })
     }
 
     if (await aux.buscarEmail(email)) {
@@ -53,7 +53,7 @@ const validarNovaConta = async (req, res, next) => {
     if (!senha) {
         return res.status(400).json({ mensagem: "Por favor informe a senha" })
     }
-    
+
     if (isNaN(Number(senha))) {
         return res.status(400).json({ mensagem: "A senha só pode conter números" })
     }
@@ -65,4 +65,32 @@ const validarNovaConta = async (req, res, next) => {
     return next()
 };
 
-module.exports = { validarSenhaBancoAdm, validarNovaConta };
+const validarSenha = async (req, res, next) => {
+    const { senha } = req.body;
+    const { numeroConta } = req.params;
+
+    if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ mensagem: "Por favor informe os dados" })
+    };
+
+    const conta = await aux.buscarConta(numeroConta);
+    if (!conta) {
+        return res.status(404).json({ mensagem: "Conta não localizada" })
+    };
+
+    if (!senha) {
+        return res.status(400).json({ mensagem: "Por favor informe a senha" })
+    };
+
+    if (senha !== conta.usuario.senha) {
+        return res.status(403).json({ mensagem: "Senha incorreta" })
+    };
+
+    return next();
+};
+
+module.exports = {
+    validarSenhaBancoAdm,
+    validarNovaConta,
+    validarSenha
+};
