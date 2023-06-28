@@ -70,8 +70,34 @@ const atualizarCadastroUsuario = async (req, res) => {
     await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));
     return res.status(201).json({ mensagem: 'Conta atualizada com sucesso!' });
 };
+
+const deletarConta = async (req, res) => {
+    const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
+    const { numeroConta } = req.params;
+
+    const conta = await aux.buscarConta(numeroConta);
+    if (!conta) {
+        return res.status(404).json({ mensagem: "Conta não localizada" })
+    };
+
+    if (conta.saldo !== 0) {
+        return res.status(400).json({ mensagem: 'O saldo não está zerado, a conta não pode ser excluida' })
+    };
+
+    const contasRestantes = await dadosBanco.contas.filter((conta) => {
+        return conta.numero != numeroConta;
+    });
+
+    dadosBanco.contas = contasRestantes;
+    await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));
+
+    return res.status(200).json({ mensagem: "Conta excluida com sucesso" });
+}
+
+
 module.exports = {
     listarContas,
     criarContaUsuario,
-    atualizarCadastroUsuario
+    atualizarCadastroUsuario,
+    deletarConta
 };

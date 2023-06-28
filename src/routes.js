@@ -14,4 +14,9 @@ rotas.put('/contas/:numeroConta/usuario',
     middleware.validarSenha,
     contas.atualizarCadastroUsuario);
 
+//DELETE /contas/:numeroConta?senha_banco=xxxx
+rotas.delete('/contas/:numeroConta',
+    middleware.validarSenhaBancoAdm,
+    contas.deletarConta)
+
 module.exports = rotas;

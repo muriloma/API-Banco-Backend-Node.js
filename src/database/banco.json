@@ -1,1 +1,38 @@
-{"banco":{"nome":"Bank","numero":"123","agencia":"0001","senha":"123Bank"},"id_contas":4,"contas":[{"numero":"1","saldo":0,"usuario":{"nome":"Teste","cpf":"12443929108","data_nascimento":"2021-03-15","telefone":"71999998888","email":"teste@bank.com","senha":"1234"}},{"numero":"2","saldo":0,"usuario":{"nome":"Murilo","cpf":"61107890039","data_nascimento":"2021-03-15","telefone":"71999998888","email":"fulano@bank.com","senha":"1234"}},{"numero":"3","saldo":0,"usuario":{"nome":"Cicrano","cpf":"86537445680","data_nascimento":"2021-03-15","telefone":"71999998888","email":"email@bank.com","senha":"1234"}}],"saques":[],"depositos":[],"transferencias":[]}
+{
+    "banco": {
+        "nome": "Bank",
+        "numero": "123",
+        "agencia": "0001",
+        "senha": "123Bank"
+    },
+    "id_contas": 4,
+    "contas": [
+        {
+            "numero": "1",
+            "saldo": 0,
+            "usuario": {
+                "nome": "Teste",
+                "cpf": "12443929108",
+                "data_nascimento": "2021-03-15",
+                "telefone": "71999998888",
+                "email": "teste@bank.com",
+                "senha": "1234"
+            }
+        },
+        {
+            "numero": "2",
+            "saldo": 0,
+            "usuario": {
+                "nome": "Joao",
+                "cpf": "61107890039",
+                "data_nascimento": "2021-03-15",
+                "telefone": "71999998888",
+                "email": "fulano@bank.com",
+                "senha": "1234"
+            }
+        }
+    ],
+    "saques": [],
+    "depositos": [],
+    "transferencias": []
+}
