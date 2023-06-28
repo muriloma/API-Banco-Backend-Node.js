@@ -25,7 +25,7 @@ const criarContaUsuario = async (req, res) => {
 };
 
 const atualizarCadastroUsuario = async (req, res) => {
-    const novosDados = req.body;
+    let novosDados = req.body;
     const { numeroConta } = req.params;
     const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
 
@@ -34,6 +34,11 @@ const atualizarCadastroUsuario = async (req, res) => {
         if (!Object.keys(conta.usuario).includes(dado)) {
             return res.status(404).json({ mensagem: 'Dado incorreto, por favor verifique o dado a ser atualizado' })
         }
+    };
+
+    if (novosDados.cpf) {
+        const { cpf, ...dados } = novosDados;
+        novosDados = dados
     };
 
     if (novosDados.email) {
@@ -47,23 +52,15 @@ const atualizarCadastroUsuario = async (req, res) => {
         };
     };
 
-    if (novosDados.cpf) {
-        const contaCpfBuscado = await aux.buscarCpf(novosDados.cpf);
-        if (!validate(novosDados.cpf)) {
-            return res.status(401).json({ mensagem: "Por favor informe um CPF válido" })
-        };
-
-        if (contaCpfBuscado && contaCpfBuscado.usuario.cpf !== conta.usuario.cpf) {
-            return res.status(400).json({ mensagem: 'CPF já utilizado, por favor informe outro CPF' })
-        };
-    };
 
     if (novosDados.nome && novosDados.nome.trim() === "") {
         return res.status(400).json({ mensagem: "Por favor preencha um nome válido" })
     };
 
-    if (novosDados.telefone && novosDados.telefone.length() > 11 || novosDados.telefone.length() < 10) {
-        return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+    if (novosDados.telefone) {
+        if (novosDados.telefone.length() > 11 || novosDados.telefone.length() < 10) {
+            return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+        }
     };
 
     for (let dado of Object.keys(novosDados)) {
