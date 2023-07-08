@@ -6,17 +6,21 @@ const aux = require('./utils/auxfunc')
 
 const validarSenhaBancoAdm = async (req, res, next) => {
     const { senha_banco } = req.query;
-    const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
+    try {
+        const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
 
-    if (senha_banco !== dadosBanco.banco.senha) {
-        return res.status(400).json({ mensagem: "Senha incorreta" })
-    };
-    return next();
+        if (senha_banco !== dadosBanco.banco.senha) {
+            return res.status(400).json({ mensagem: "Senha incorreta" })
+        };
+        return next();
+
+    } catch (erro) {
+        return res.status(500).json({ Erro: erro.message });
+    }
 };
 
 const validarNovaConta = async (req, res, next) => {
     const { nome, cpf, data_nascimento, telefone, email, senha } = req.body;
-    const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
 
     if (!nome || nome.trim() === "") {
         return res.status(400).json({ mensagem: "Por favor preencha o nome" })
@@ -38,7 +42,7 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe o telefone" })
     }
 
-    if (telefone.length() > 11 || telefone.length() < 10) {
+    if (telefone.length > 11 || telefone.length < 10) {
         return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
     }
 
@@ -58,8 +62,8 @@ const validarNovaConta = async (req, res, next) => {
         return res.status(400).json({ mensagem: "A senha só pode conter números" })
     }
 
-    if (senha.length() < 8 || senha.length() > 24) {
-        return res.status(400).json({ mensagem: "A senha deve conter de 8 a 24 dígitos" })
+    if (senha.length !== 6) {
+        return res.status(400).json({ mensagem: "A senha deve conter 6 dígitos" })
     }
 
     return next()
