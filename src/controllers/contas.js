@@ -118,10 +118,22 @@ const deletarConta = async (req, res) => {
     }
 }
 
+const saldo = async (req, res) => {
+    const { numeroConta } = req.params;
+    try {
+        const conta = await aux.buscarConta(numeroConta);
+        return res.status(200).json({ Saldo: conta.saldo });
+
+    } catch (erro) {
+        return res.status(500).json({ Erro: erro.message });
+    };
+};
+
 
 module.exports = {
     listarContas,
     criarContaUsuario,
     atualizarCadastroUsuario,
-    deletarConta
+    deletarConta,
+    saldo
 };

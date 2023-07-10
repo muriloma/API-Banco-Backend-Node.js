@@ -93,8 +93,38 @@ const validarSenha = async (req, res, next) => {
     return next();
 };
 
+const validarSenhaConsulta = async (req, res, next) => {
+    const { senha } = req.query;
+    const { numeroConta } = req.params;
+
+    if (!senha) {
+        return res.status(400).json({ mensagem: "Por favor informe a senha" });
+    };
+
+    if (!numeroConta) {
+        return res.status(400).json({ mensagem: "Por favor informe a conta" });
+    };
+
+    try {
+        const conta = await aux.buscarConta(numeroConta);
+        if (!conta) {
+            return res.status(404).json({ mensagem: "Conta não localizada" });
+        };
+
+        if (senha !== conta.usuario.senha) {
+            return res.status(403).json({ mensagem: "Senha incorreta" });
+        };
+
+    } catch (erro) {
+        return res.status(500).json({ Erro: erro.message });
+    }
+
+    next();
+};
+
 module.exports = {
     validarSenhaBancoAdm,
     validarNovaConta,
-    validarSenha
+    validarSenha,
+    validarSenhaConsulta
 };
