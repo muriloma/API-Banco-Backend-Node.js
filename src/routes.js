@@ -24,5 +24,7 @@ rotas.delete('/contas/:numeroConta',
 // POST /transacoes/depositar   #Realiza um depósito na conta
 rotas.post('/transacoes/depositar', transacoes.depositar);
 
+// POST /transacoes/sacar  #Realiza um saque na cont
+rotas.post('/transacoes/sacar', transacoes.sacar);
 
 module.exports = rotas;
