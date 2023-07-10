@@ -27,4 +27,8 @@ rotas.post('/transacoes/depositar', transacoes.depositar);
 // POST /transacoes/sacar  #Realiza um saque na cont
 rotas.post('/transacoes/sacar', transacoes.sacar);
 
+// POST /transacoes/transferir  #Realiza uma transferencia
+rotas.post('/transacoes/transferir', transacoes.transferir);
+
+
 module.exports = rotas;
