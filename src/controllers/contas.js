@@ -40,7 +40,10 @@ const atualizarCadastroUsuario = async (req, res) => {
     try {
         const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
 
-        const conta = await aux.buscarConta(numeroConta);
+        const conta = dadosBanco.contas.find((conta) => {
+            return numeroConta === conta.numero
+        });
+
         for (let dado of Object.keys(novosDados)) {
             if (!Object.keys(conta.usuario).includes(dado)) {
                 return res.status(404).json({ mensagem: 'Dado incorreto, por favor verifique o dado a ser atualizado' })
@@ -75,7 +78,7 @@ const atualizarCadastroUsuario = async (req, res) => {
         };
 
         for (let dado of Object.keys(novosDados)) {
-            dadosBanco.contas[numeroConta - 1].usuario[dado] = novosDados[dado];
+            conta.usuario[dado] = novosDados[dado];
         };
 
         await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));

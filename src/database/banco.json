@@ -9,7 +9,7 @@
     "contas": [
         {
             "numero": "1",
-            "saldo": 3000,
+            "saldo": 0,
             "usuario": {
                 "nome": "Teste",
                 "cpf": "12443929108",
@@ -23,22 +23,16 @@
             "numero": "2",
             "saldo": 0,
             "usuario": {
-                "nome": "Joao",
+                "nome": "Cicrano",
                 "cpf": "61107890039",
                 "data_nascimento": "2021-03-15",
                 "telefone": "71999998888",
-                "email": "fulano@bank.com",
+                "email": "email@bank.com",
                 "senha": "123456"
             }
         }
     ],
     "saques": [],
-    "depositos": [
-        {
-            "data": "09-07-2023 22:57:09",
-            "numero_conta": "1",
-            "valor": 3000
-        }
-    ],
+    "depositos": [],
     "transferencias": []
 }
