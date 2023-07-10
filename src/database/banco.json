@@ -9,7 +9,7 @@
     "contas": [
         {
             "numero": "1",
-            "saldo": 0,
+            "saldo": 3000,
             "usuario": {
                 "nome": "Teste",
                 "cpf": "12443929108",
@@ -33,6 +33,12 @@
         }
     ],
     "saques": [],
-    "depositos": [],
+    "depositos": [
+        {
+            "data": "09-07-2023 22:57:09",
+            "numero_conta": "1",
+            "valor": 3000
+        }
+    ],
     "transferencias": []
 }
