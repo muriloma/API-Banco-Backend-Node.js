@@ -43,11 +43,11 @@ const validarNovaConta = async (req, res, next) => {
     }
 
     if (telefone.length > 11 || telefone.length < 10) {
-        return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+        return res.status(400).json({ mensagem: "Por favor informe um telefone com DDD válido" })
     }
 
     if (!email || !validarEmail.validate(email)) {
-        return res.status(401).json({ mensagem: "Por favor informe um email válido" })
+        return res.status(400).json({ mensagem: "Por favor informe um email válido" })
     }
 
     if (await aux.buscarEmail(email)) {
@@ -87,7 +87,7 @@ const validarSenha = async (req, res, next) => {
     };
 
     if (senha !== conta.usuario.senha) {
-        return res.status(403).json({ mensagem: "Senha incorreta" })
+        return res.status(400).json({ mensagem: "Senha incorreta" })
     };
 
     return next();

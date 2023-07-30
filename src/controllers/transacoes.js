@@ -38,7 +38,7 @@ const depositar = async (req, res) => {
         dadosBanco.depositos.push(deposito);
         await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));
 
-        return res.status(201).json({ mensagem: "Depósito realizado com sucesso!" });
+        return res.status(200).json({ mensagem: "Depósito realizado com sucesso!" });
 
     } catch (erro) {
         return res.status(500).json({ Erro: erro.message });
@@ -70,7 +70,7 @@ const sacar = async (req, res) => {
         };
 
         if (senha !== conta.usuario.senha) {
-            return res.status(403).json({ mensagem: "Senha incorreta" });
+            return res.status(400).json({ mensagem: "Senha incorreta" });
         };
 
         if (Math.sign(valor) !== 1 || valor === 0) {
@@ -93,7 +93,7 @@ const sacar = async (req, res) => {
         dadosBanco.saques.push(saque);
         await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));
 
-        return res.status(201).json({ mensagem: "Saque realizado com sucesso!" });
+        return res.status(200).json({ mensagem: "Saque realizado com sucesso!" });
 
     } catch (erro) {
         return res.status(500).json({ Erro: erro.message });

@@ -85,7 +85,7 @@ const atualizarCadastroUsuario = async (req, res) => {
         };
 
         await fs.writeFile('./src/database/banco.json', JSON.stringify(dadosBanco));
-        return res.status(201).json({ mensagem: 'Conta atualizada com sucesso!' });
+        return res.status(200).json({ mensagem: 'Conta atualizada com sucesso!' });
 
     } catch (erro) {
         return res.status(500).json({ Erro: erro.message });
