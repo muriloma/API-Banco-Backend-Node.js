@@ -153,14 +153,15 @@ Esse endpoint cria uma conta bancária, onde será gerado um número único para
 
 ```json
 {
-	"nome": "Atol",
- 	"cpf": "27633626488",
-	"data_nascimento": "2021-03-15",
-	"telefone": "7199989888",
+    "nome": "Atol",
+    "cpf": "27633626488",
+    "data_nascimento": "2021-03-15",
+    "telefone": "7199989888",
     "email": "email2@bank.com",
     "senha": "123456"
 }
 ```
+
 
 #### Saída
 
@@ -221,8 +222,8 @@ Esse endpoint atualiza apenas os dados do usuário de uma conta bancária. Podem
 
 ```json
 {
-	"nome": "Fulano",
-	"telefone": "71999998888",
+    "nome": "Fulano",
+    "telefone": "71999998888",
     "email": "emailx@bank.com",
     "senha": "456123"
 }
@@ -299,8 +300,8 @@ Esse endpoint soma o valor do depósito ao saldo de uma conta válida, e registr
 
 ```json
 {
-	"numeroConta": "1",
-	"valor": 10000 
+    "numeroConta": "1",
+    "valor": 10000 
 }
 ```
 
@@ -322,9 +323,9 @@ Esse endpoint soma o valor do depósito ao saldo de uma conta válida, e registr
 
 ```JSON
 {
-	"data": "30-07-2023 07:57:37",
-	"numero_conta": "2",
-	"valor": 30000
+    "data": "30-07-2023 07:57:37",
+    "numero_conta": "2",
+    "valor": 30000
 }
 ```
 
@@ -353,9 +354,9 @@ Esse endpoint realiza o saque de um valor em uma determinada conta bancária e r
 
 ```JSON
 {
-	"numeroConta": "2",
-	"valor": 100000,
-	"senha": "123456"
+    "numeroConta": "2",
+    "valor": 100000,
+    "senha": "123456"
 }
 ```
 
@@ -409,10 +410,10 @@ No body da requisição deverá ser passado o número da conta de origem, o núm
 
 ```JSON
 {
-	"numeroContaOrigem": "2", 
-	"numeroContaDestino": "1",
-	"valor": 1000,
-	"senha": "123456"
+    "numeroContaOrigem": "2", 
+    "numeroContaDestino": "1",
+    "valor": 1000,
+    "senha": "123456"
 }
 ```
 
@@ -504,29 +505,29 @@ Esse endpoint lista as transações realizadas de uma conta específica informad
 ```JSON
 // HTTP Status 200
 {
-	"depositos": [
-		{
-			"data": "30-07-2023 07:57:37",
-			"numero_conta": "2",
-			"valor": 30000
-		}
-	],
-	"saques": [
-		{
-			"data": "30-07-2023 08:07:19",
-			"numero_conta": "2",
-			"valor": 200
-		}
-	],
-	"transferencias_enviadas": [
-		{
-			"data": "30-07-2023 08:08:24",
-			"numero_conta_origem": "2",
-			"numero_conta_destino": "1",
-			"valor": 1000
-		}
-	],
-	"transferencias_recebidas": [
+    "depositos": [
+        {
+            "data": "30-07-2023 07:57:37",
+            "numero_conta": "2",
+            "valor": 30000
+        }
+    ],
+    "saques": [
+        {
+            "data": "30-07-2023 08:07:19",
+            "numero_conta": "2",
+            "valor": 200
+        }
+    ],
+    "transferencias_enviadas": [
+        {
+            "data": "30-07-2023 08:08:24",
+            "numero_conta_origem": "2",
+            "numero_conta_destino": "1",
+            "valor": 1000
+        }
+    ],
+    "transferencias_recebidas": [
         {
             "data": "2021-08-18 20:47:24",
             "numero_conta_origem": "2",
