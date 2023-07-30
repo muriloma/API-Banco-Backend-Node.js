@@ -102,7 +102,7 @@ const sacar = async (req, res) => {
 
 
 const transferir = async (req, res) => {
-    const { numeroContaOrigem, numeroContaDestino, senha, valor } = req.body;
+    let { numeroContaOrigem, numeroContaDestino, senha, valor } = req.body;
     numeroContaOrigem = String(numeroContaOrigem);
     numeroContaDestino = String(numeroContaDestino);
 
