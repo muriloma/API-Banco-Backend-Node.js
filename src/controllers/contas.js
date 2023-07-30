@@ -55,6 +55,7 @@ const atualizarCadastroUsuario = async (req, res) => {
             novosDados = dados
         };
 
+        console.log("x", novosDados.email, "x");
         if (novosDados.email) {
             const contaEmailBuscado = await aux.buscarEmail(novosDados.email);
             if (!validarEmail.validate(novosDados.email)) {
@@ -64,8 +65,12 @@ const atualizarCadastroUsuario = async (req, res) => {
             if (contaEmailBuscado && contaEmailBuscado.usuario.email !== conta.usuario.email) {
                 return res.status(400).json({ mensagem: 'E-mail já utilizado, por favor informe outro email' })
             };
+
         };
 
+        if (novosDados.email === "") {
+            return res.status(400).json({ mensagem: "Por favor informe um email válido" })
+        }
 
         if (novosDados.nome && novosDados.nome.trim() === "") {
             return res.status(400).json({ mensagem: "Por favor preencha um nome válido" })
