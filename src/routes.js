@@ -33,5 +33,8 @@ rotas.post('/transacoes/transferir', transacoes.transferir);
 // GET /contas/saldo/:numeroConta?senha=xxxxxx
 rotas.get('/contas/saldo/:numeroConta', middleware.validarSenhaConsulta, contas.saldo);
 
+// GET /contas/extrato/:numeroConta?senha=xxxxxx
+rotas.get('/contas/extrato/:numeroConta', middleware.validarSenhaConsulta, contas.extrato)
+
 
 module.exports = rotas;

@@ -112,7 +112,7 @@ const validarSenhaConsulta = async (req, res, next) => {
         };
 
         if (senha !== conta.usuario.senha) {
-            return res.status(403).json({ mensagem: "Senha incorreta" });
+            return res.status(400).json({ mensagem: "Senha incorreta" });
         };
 
     } catch (erro) {

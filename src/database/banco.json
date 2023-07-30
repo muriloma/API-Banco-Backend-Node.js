@@ -5,11 +5,11 @@
         "agencia": "0001",
         "senha": "123Bank"
     },
-    "id_contas": 3,
+    "id_contas": 4,
     "contas": [
         {
             "numero": "1",
-            "saldo": 0,
+            "saldo": 27000,
             "usuario": {
                 "nome": "Teste",
                 "cpf": "12443929108",
@@ -21,7 +21,7 @@
         },
         {
             "numero": "2",
-            "saldo": 0,
+            "saldo": 28800,
             "usuario": {
                 "nome": "Cicrano",
                 "cpf": "61107890039",
@@ -32,7 +32,41 @@
             }
         }
     ],
-    "saques": [],
-    "depositos": [],
-    "transferencias": []
+    "saques": [
+        {
+            "data": "30-07-2023 08:07:19",
+            "numero_conta": "2",
+            "valor": 200
+        }
+    ],
+    "depositos": [
+        {
+            "data": "30-07-2023 07:57:17",
+            "numero_conta": "1",
+            "valor": 6000
+        },
+        {
+            "data": "30-07-2023 07:57:37",
+            "numero_conta": "2",
+            "valor": 30000
+        },
+        {
+            "data": "30-07-2023 07:57:51",
+            "numero_conta": "1",
+            "valor": 10000
+        },
+        {
+            "data": "30-07-2023 07:58:07",
+            "numero_conta": "1",
+            "valor": 10000
+        }
+    ],
+    "transferencias": [
+        {
+            "data": "30-07-2023 08:08:24",
+            "numero_conta_origem": "2",
+            "numero_conta_destino": "1",
+            "valor": 1000
+        }
+    ]
 }

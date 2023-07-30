@@ -132,11 +132,50 @@ const saldo = async (req, res) => {
     };
 };
 
+const extrato = async (req, res) => {
+    const { numeroConta } = req.params;
+
+    try {
+        const dadosBanco = JSON.parse(await fs.readFile('./src/database/banco.json'));
+
+        const conta = await aux.buscarConta(numeroConta);
+
+        const listaDeSaques = dadosBanco.saques.filter((saque) => {
+            return numeroConta === saque.numero_conta
+        });
+
+        const listaDeDepositos = dadosBanco.depositos.filter((deposito) => {
+            return numeroConta === deposito.numero_conta
+        });
+
+        const listaDeTransferenciasEnviadas = dadosBanco.transferencias.filter((transferencia) => {
+            return numeroConta === transferencia.numero_conta_origem
+        });
+
+        const listaDeTransferenciasRecebidas = dadosBanco.transferencias.filter((transferencia) => {
+            return numeroConta === transferencia.numero_conta_destino
+        });
+
+        const extrato = {
+            depositos: listaDeDepositos,
+            saques: listaDeSaques,
+            transferencias_enviadas: listaDeTransferenciasEnviadas,
+            transferencias_recebidas: listaDeTransferenciasRecebidas
+        }
+
+        return res.status(200).json(extrato);
+
+    } catch (erro) {
+        return res.status(500).json({ Erro: erro.message });
+    };
+};
+
 
 module.exports = {
     listarContas,
     criarContaUsuario,
     atualizarCadastroUsuario,
     deletarConta,
-    saldo
+    saldo,
+    extrato
 };
