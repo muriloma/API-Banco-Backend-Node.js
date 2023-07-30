@@ -77,14 +77,15 @@ const validarSenha = async (req, res, next) => {
         return res.status(400).json({ mensagem: "Por favor informe os dados" })
     };
 
+    if (!senha) {
+        return res.status(400).json({ mensagem: "Por favor informe a senha" })
+    };
+
     const conta = await aux.buscarConta(numeroConta);
     if (!conta) {
         return res.status(404).json({ mensagem: "Conta não localizada" })
     };
 
-    if (!senha) {
-        return res.status(400).json({ mensagem: "Por favor informe a senha" })
-    };
 
     if (senha !== conta.usuario.senha) {
         return res.status(403).json({ mensagem: "Senha incorreta" })
