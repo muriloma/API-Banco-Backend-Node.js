@@ -49,6 +49,7 @@ const depositar = async (req, res) => {
 
 const sacar = async (req, res) => {
     let { valor, numeroConta, senha } = req.body;
+    numeroConta = String(numeroConta);
 
     if (!senha) {
         return res.status(400).json({ mensagem: 'Por favor informar uma senha válida' });
@@ -85,7 +86,7 @@ const sacar = async (req, res) => {
 
         const saque = {
             data,
-            numero_conta: String(numeroConta),
+            numero_conta: numeroConta,
             valor
         };
 
@@ -99,19 +100,11 @@ const sacar = async (req, res) => {
     };
 };
 
-// Você deverá, OBRIGATORIAMENTE:
-
-// Verificar se o número da conta de origem, de destino, senha da conta de origem ok
-// e valor da transferência foram informados no body ok 
-// Verificar se a conta bancária de origem informada existe ok
-// Verificar se a conta bancária de destino informada existe ok
-// Verificar se a senha informada é uma senha válida para a conta de origem informada ok
-// Verificar se há saldo disponível na conta de origem para a transferência ok
-// Subtrair o valor da transfência do saldo na conta de origem ok
-// Somar o valor da transferência no saldo da conta de destino ok
 
 const transferir = async (req, res) => {
     const { numeroContaOrigem, numeroContaDestino, senha, valor } = req.body;
+    numeroContaOrigem = String(numeroContaOrigem);
+    numeroContaDestino = String(numeroContaDestino);
 
     if (!senha) {
         return res.status(400).json({ mensagem: 'Por favor informar uma senha válida' });
@@ -157,8 +150,8 @@ const transferir = async (req, res) => {
         const data = format(new Date(), "dd-MM-yyyy' 'HH:mm:ss");
         const transferencia = {
             data,
-            numero_conta_origem: String(numeroContaOrigem),
-            numero_conta_destino: String(numeroContaDestino),
+            numero_conta_origem: numeroContaOrigem,
+            numero_conta_destino: numeroContaDestino,
             valor
         };
         dadosBanco.transferencias.push(transferencia);
