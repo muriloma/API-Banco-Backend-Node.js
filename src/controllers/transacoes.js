@@ -5,8 +5,8 @@ const { format } = require('date-fns');
 
 const depositar = async (req, res) => {
     let { numeroConta, valor } = req.body;
+    numeroConta = String(numeroConta);
 
-    // O numero da conta vem como string e o valor como number
     if (!numeroConta || !valor) {
         return res.status(400).json({ mensagem: 'Por favor informar dados válidos' });
     };
@@ -31,7 +31,7 @@ const depositar = async (req, res) => {
 
         const deposito = {
             data,
-            numero_conta: String(numeroConta),
+            numero_conta: numeroConta,
             valor
         };
 
