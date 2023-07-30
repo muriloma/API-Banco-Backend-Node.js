@@ -58,7 +58,7 @@ const atualizarCadastroUsuario = async (req, res) => {
         if (novosDados.email) {
             const contaEmailBuscado = await aux.buscarEmail(novosDados.email);
             if (!validarEmail.validate(novosDados.email)) {
-                return res.status(401).json({ mensagem: "Por favor informe um email válido" })
+                return res.status(400).json({ mensagem: "Por favor informe um email válido" })
             };
 
             if (contaEmailBuscado && contaEmailBuscado.usuario.email !== conta.usuario.email) {
@@ -73,7 +73,7 @@ const atualizarCadastroUsuario = async (req, res) => {
 
         if (novosDados.telefone) {
             if (novosDados.telefone.length > 11 || novosDados.telefone.length < 10) {
-                return res.status(401).json({ mensagem: "Por favor informe um telefone com DDD válido" })
+                return res.status(400).json({ mensagem: "Por favor informe um telefone com DDD válido" })
             }
         };
 
